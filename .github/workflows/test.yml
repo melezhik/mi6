@@ -25,9 +25,11 @@ jobs:
       - uses: Raku/setup-raku@v1
         with:
           raku-version: ${{ matrix.raku-version }}
+      - name: Upgrade zef
+        run: zef upgrade --/test zef
       - name: Install Dependencies
-        run: zef install --deps-only --/test --test-depends .
-      - name: Install App::Prove6
-        run: zef install --/test App::Prove6
+        run: zef install --/test --deps-only .
+      - name: Install Development Dependencies
+        run: zef install --/test App::Prove6 File::Temp Distribution::Builder::MakeFromJSON
       - name: Run Tests
         run: prove6 -I. t xt
