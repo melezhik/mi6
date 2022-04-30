@@ -1,0 +1,2 @@
+main:
+ with-code-coverage: false
